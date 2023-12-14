@@ -1,8 +1,13 @@
 <?php
 include "../../Controllers/AuthorController.php";
+
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+    AuthorController::destroy($_POST['id']);
+    header("Location: ./index.php");
+}
+
 $authors = AuthorController::getAll();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,16 +37,18 @@ $authors = AuthorController::getAll();
                     <td> <?= $author->name ?> </td>
                     <td> <?= $author->surname ?> </td>
                     <td>
-                    <div class="d-inline-block">
-                        <a class="btn btn-primary" href="">show</a>
-                    </div>
                         <div class="d-inline-block">
-                            <form action="" method="post">
+                            <a class="btn btn-primary" href="./show.php?id=<?= $author->id ?>">show</a>
+                        </div>
+                        <div class="d-inline-block">
+                            <form action="./edit.php" method="get">
+                                <input type="hidden" name="id" value="<?= $author->id ?>">
                                 <button class="btn btn-success" type="submit">edit</button>
                             </form>
                         </div>
-                        <div  class="d-inline-block">
-                            <form action="" method="post">
+                        <div class="d-inline-block">
+                            <form action="./index.php" method="post">
+                                <input type="hidden" name="id" value="<?= $author->id ?>">
                                 <button class="btn btn-danger" type="submit">delete</button>
                             </form>
                         </div>
