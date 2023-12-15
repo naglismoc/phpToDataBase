@@ -4,7 +4,9 @@ if (!isset($_GET['id'])) {
 }
 
 include "../../Controllers/AuthorController.php";
+include "../../Controllers/BookController.php";
 $author = AuthorController::find($_GET['id']);
+$books = BookController::findByAuthor($_GET['id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,8 +32,10 @@ $author = AuthorController::find($_GET['id']);
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Books Written: <?=$author->booksWritten?></li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A third item</li>
+                    <?php foreach ($books as $book) { ?>
+                        <li class="list-group-item"><?= $book->title?></li>
+
+                 <?php   } ?>
                 </ul>
                 <div class="card-body">
                     <a href="#" class="card-link">Books link</a>

@@ -22,6 +22,7 @@ $authors = AuthorController::getAll();
     <div class="container">
         <h1>Čia yra autoriai</h1>
         <a class="btn btn-success" href="./create.php">sukurti</a>
+        <a class="btn btn-primary" href="../books/index.php">Pamatyti knygų sąrašą</a>
         <table class="table table-striped">
             <tr>
                 <th>nr.</th>
