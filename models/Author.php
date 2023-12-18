@@ -58,6 +58,7 @@ class Author
         $stmt = $db->prepare($sql);
         $stmt->bind_param("ss", $this->name, $this->surname);
         $stmt->execute();
+       //echo $stmt->insert_id;die;
         $db->close();
     }
 
