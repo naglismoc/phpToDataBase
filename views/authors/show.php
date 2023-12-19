@@ -6,7 +6,7 @@ if (!isset($_GET['id'])) {
 include "../../Controllers/AuthorController.php";
 include "../../Controllers/BookController.php";
 $author = AuthorController::find($_GET['id']);
-$books = BookController::findByAuthor($_GET['id']);
+$books = BookController::getAll($_GET['id']);
 
 
 include_once "../components/head.php";

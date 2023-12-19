@@ -11,23 +11,22 @@ $authors = AuthorController::getAll();
 
 include_once "../components/head.php";
 
-$_SESSION["kitas msg"] = "labas";
 ?>
 
 <div class="container">
-    
+
     <h1>Čia yra autoriai</h1>
     <a class="btn btn-success" href="./create.php">sukurti</a>
     <a class="btn btn-primary" href="../books/index.php">Pamatyti knygų sąrašą</a>
 
-    
+
 
     <table class="table table-striped">
         <tr>
             <th>nr.</th>
-            <th>id</th>
-            <th>name</th>
-            <th>surname</th>
+            <th>id <a href="./index.php?orderBy=id&order=asc">▲</a> <a href="./index.php?orderBy=id&order=desc">▼</a></th>
+            <th>name <a href="./index.php?orderBy=name&order=asc">▲</a> <a href="./index.php?orderBy=name&order=desc">▼</a></th>
+            <th>surname <a href="./index.php?orderBy=surname&order=asc">▲</a> <a href="./index.php?orderBy=surname&order=desc">▼</a></th>
             <th>valdymas</th>
         </tr>
         <?php foreach ($authors as $key => $author) { ?>

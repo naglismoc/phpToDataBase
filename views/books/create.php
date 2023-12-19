@@ -12,38 +12,42 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 include_once "../components/head.php";
 ?>
 
-    <div class="container mt-5 ">
-        <div class="row bg-secondary bg-gradient bg-opacity-25">
-            <div class="col"></div>
-            <div class="col-6">
-                <form action="./create.php" method="POST">
-                    <div class="form-group">
-                        <label for="name">Title:</label>
-                        <input type="text" class="form-control" name="title" placeholder="Enter title">
-                    </div>
-                    <div class="form-group">
-                        <label for="surname">Genre:</label>
-                        <input type="text" class="form-control" name="genre" placeholder="Enter genre">
-                    </div>
-                    <div class="form-group">
-                        <label for="author">author:</label>
-                        <div id="emailHelp" class="form-text">Create an author <a href="../authors/create.php">here</a> if it does not exists </div>
-  
-                        <select class="form-select " id="author" name="author_id" aria-label="Default select example">
-                            <?php
-                            foreach ($authors as $author) { ?>
-                                <option value="<?= $author->id ?>"><?= $author->name . " " . $author->surname ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
+<div class="container mt-5 ">
+    <div class="row bg-secondary bg-gradient bg-opacity-25">
+        <div class="col"></div>
+        <div class="col-6">
+            <form action="./create.php" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="name">Title:</label>
+                    <input type="text" class="form-control" name="title" placeholder="Enter title">
+                </div>
+                <div class="form-group">
+                    <label for="surname">Genre:</label>
+                    <input type="text" class="form-control" name="genre" placeholder="Enter genre">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Photo:</label>
+                    <input type="file" class="form-control-file" name="photo">
+                </div>
+                <div class="form-group">
+                    <label for="author">author:</label>
+                    <div id="emailHelp" class="form-text">Create an author <a href="../authors/create.php">here</a> if it does not exists </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-            <div class="col"></div>
+                    <select class="form-select " id="author" name="author_id" aria-label="Default select example">
+                        <?php
+                        foreach ($authors as $author) { ?>
+                            <option value="<?= $author->id ?>"><?= $author->name . " " . $author->surname ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
+        <div class="col"></div>
     </div>
+</div>
 
-    <?php
+<?php
 include "../components/footer.php";
 ?>

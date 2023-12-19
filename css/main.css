@@ -1,0 +1,9 @@
+td > a{
+    text-decoration: none;
+    color: black;
+    font-size: 12px;
+    padding: 10px;
+}
+td > a:hover{
+    color:blue;
+}

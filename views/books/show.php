@@ -31,6 +31,7 @@ include_once "../components/head.php";
                 <a href="#" class="card-link">Books link</a>
                 <a href="./index.php" class="card-link">Show all books</a>
             </div>
+            <img src="<?= is_null($book->photo) ? "../../images/bookDefault.png" : "../../images/booksPhotos/" . $book->photo?> " alt="zzzzzzzzzzzzzzzz">
         </div>
     </div>
     <div class="col"></div>
@@ -40,4 +41,4 @@ include "../components/footer.php";
 ?>
 
 
-<!-- login, file upload, filter sort, session, /*components*/, messages -->
+<!-- login, file upload, filter, sort, session, components, messages*/ -->

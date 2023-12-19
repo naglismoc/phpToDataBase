@@ -1,16 +1,20 @@
 <?php
+include_once "../components/head.php";
+
+
 include "../../Controllers/AuthorController.php";
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
-    AuthorController::store();
-    $_SESSION["success"][] = "Autorius sėkmingai sukurtas";
-print_r($_SESSION);
-// die;
-    header("Location: ./index.php");
+    if(AuthorController::store()){
+        $_SESSION["success"] = "Autorius sėkmingai sukurtas";
+        header("Location: ./index.php");
     die;
+    }
+print_r($_POST);
+// die;
+    
 }
 
-include_once "../components/head.php";
 ?>
 
     <div class="container mt-5 ">
@@ -20,11 +24,11 @@ include_once "../components/head.php";
                 <form action="./create.php" method="POST">
                     <div class="form-group">
                         <label for="name">Name:</label>
-                        <input type="text" class="form-control" name="name" placeholder="Enter Name">
+                        <input type="text" class="form-control" name="name" placeholder="Enter Name" value="<?=(isset($_POST['name'])) ? $_POST['name'] : "" ?>">
                     </div>
                     <div class="form-group">
                         <label for="surname">Surname:</label>
-                        <input type="text" class="form-control" name="surname" placeholder="Enter Surname">
+                        <input type="text" class="form-control" name="surname" placeholder="Enter Surname" value="<?=(isset($_POST['surname'])) ? $_POST['surname'] : "" ?>">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

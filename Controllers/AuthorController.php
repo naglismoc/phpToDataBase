@@ -13,10 +13,22 @@ public static function find($id){
 }
 
 public static function store() {
+    if (strlen($_POST['name']) == 0) {
+        $errors[] = " vardas per trumpas";
+    }
+    
+    if (strlen($_POST['surname']) == 0) {
+        $errors[] = " pavarde per trumpa";
+    }
+    if($errors){
+        $_SESSION['alert'] = $errors;
+        return false;
+    }
     $author = new Author();
     $author->name = $_POST['name'];
     $author->surname = $_POST['surname'];
     $author->save();
+    return true;
 }
 public static function update($id) {
     $author = Author::find($id);

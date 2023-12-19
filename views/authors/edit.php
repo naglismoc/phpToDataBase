@@ -1,9 +1,13 @@
 <?php
+include_once "../components/head.php";
+
 include "../../Controllers/AuthorController.php";
 
 //jei atejai su post, atnaujinam irasa, ir redirectinam i index.php
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     AuthorController::update($_POST['id']);
+    $_SESSION["success"] = "Autorius sėkmingai atnaujintas";
+
     header("Location: ./index.php");
 }
 
@@ -14,7 +18,6 @@ if (!isset($_GET['id'])) {
 $author = AuthorController::find($_GET['id']);
 // print_r($author);die;
 
-include_once "../components/head.php";
 ?>
 
     <div class="container mt-5 ">

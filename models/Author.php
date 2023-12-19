@@ -7,7 +7,7 @@ class Author
     public $surname;
     public $booksWritten;
 
-    public function __construct($id = 0, $name = "", $surname = "",$booksWritten = 0)
+    public function __construct($id = 0, $name = "", $surname = "", $booksWritten = 0)
     {
         $this->id = $id;
         $this->name = $name;
@@ -19,7 +19,27 @@ class Author
     {
         $authors = [];
         $db = new mysqli("localhost", "root", "", "web_11_23_library");
-        $result = $db->query("SELECT * from authors");
+        $sql = "SELECT * from authors";
+        if (isset($_GET['orderBy'])) {
+            switch ($_GET['orderBy']) {
+                case 'id':
+                    $sql .= " order by id";
+                    break;
+                case 'name':             
+                    $sql .= " order by name";
+                    break;
+                case 'surname':
+                    $sql .= " order by surname";
+                    break;
+                default:
+                    break;
+            }
+        }
+        if(isset($_GET['order']) && $_GET['order'] == 'desc'){
+            $sql .= " desc;";
+        }
+        
+        $result = $db->query($sql);
         while ($row = $result->fetch_assoc()) {
             $authors[] = new Author($row['id'], $row['name'], $row['surname']);
         }
@@ -34,7 +54,7 @@ class Author
         // $sql = "SELECT * from authors where id = ?";
         $sql = " SELECT a.id, a.name, a.surname, count(a.id) as 'booksWritten'
         FROM `authors` a
-        join books b 
+        left join books b 
         on a.id = b.author_id
         WHERE a.id = ?
         group by a.id;";
@@ -42,7 +62,8 @@ class Author
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
-
+        // echo $id;die;
+        // print_r(printf( str_replace('?', '%s', $sql), $id));die;
         while ($row = $result->fetch_assoc()) {
             $author = new Author($row['id'], $row['name'], $row['surname'], $row['booksWritten']);
         }
@@ -58,7 +79,7 @@ class Author
         $stmt = $db->prepare($sql);
         $stmt->bind_param("ss", $this->name, $this->surname);
         $stmt->execute();
-       //echo $stmt->insert_id;die;
+        //echo $stmt->insert_id;die;
         $db->close();
     }
 
